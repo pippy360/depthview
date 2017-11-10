@@ -4,8 +4,6 @@
     var camera, scene, renderer;
     var geometry, material, mesh;
 
-    init();
-    animate();
 
     function init() {
 
@@ -52,19 +50,20 @@
         // Firefox supports PNG and JPEG. You could check img.src to
         // guess the original format, but be aware the using "image/jpg"
         // will re-encode the image.
-        var dataURL = canvas.toDataURL("image/png");
-
-        return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+        var imageData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
+        return imageData.data;
     }
 
     g_img = new Image();
     g_img.src = "./00004.png";
-    g_img.onload(function () {
+    g_img.onload = function () {
         console.log("getBase64Image(g_img)")
         console.log(getBase64Image(g_img))
-    })
+        init();
+        animate();
+    };
 </script>
 somethign here <button>something </button>
-
+<body></body>
 
 </html>
