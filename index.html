@@ -16,12 +16,19 @@
         material = new THREE.MeshNormalMaterial();
 
         mesh = new THREE.Mesh( geometry, material );
-        scene.add( mesh );
+        //scene.add( mesh );
+
+        for (var i = 0; i < 4; i++){
+            var geometry = new THREE.SphereGeometry( 0.1, 0.1, 100 );
+            var material = new THREE.MeshBasicMaterial( {color: 0xffff00 + (i*0x10) } );
+            var sphere = new THREE.Mesh( geometry, material );
+            sphere.position.set(0.1, 0.1, 0.1*i);
+            scene.add( sphere );
+        }
 
         renderer = new THREE.WebGLRenderer( { antialias: true } );
         renderer.setSize( window.innerWidth, window.innerHeight );
         document.body.appendChild( renderer.domElement );
-
     }
 
     function animate() {
