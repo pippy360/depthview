@@ -118,7 +118,7 @@
 	function update() {
 		
 		// add some rotation to the system
-		particleSystem.rotation.y += 0.01;
+		particleSystem.rotation.y += 0.00;
 		
 		var pCount = particleCount;
 		while(pCount--) {
@@ -132,11 +132,10 @@
 			}
 			
 			// update the velocity
-			particle.velocity.y -= Math.random() * .1;
+			//particle.velocity.y -= Math.random() * .1;
 			
 			// and the position
-			particle.position.addSelf(
-				particle.velocity);
+			//particle.position.addSelf(particle.velocity);
 		}
 		
 		// flag to the particle system that we've
@@ -149,6 +148,30 @@
 		// set up the next call
 		requestAnimFrame(update);
 	}
-	requestAnimFrame(update);
+    function getBase64Image(img) {
+        // Create an empty canvas element
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        // Copy the image contents to the canvas
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+
+        // Get the data-URL formatted image
+        // Firefox supports PNG and JPEG. You could check img.src to
+        // guess the original format, but be aware the using "image/jpg"
+        // will re-encode the image.
+        var imageData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
+        return imageData.data;
+    }
+
+    g_img = new Image();
+    g_img.src = "./00004.png";
+    g_img.onload = function () {
+        console.log("getBase64Image(g_img)")
+        console.log(getBase64Image(g_img))
+        requestAnimFrame(update);
+    };
 	</script>
 </html>
