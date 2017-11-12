@@ -27,9 +27,9 @@
             var geometry = new THREE.SphereGeometry( 0.01, 0.01, 1 );
             var material = new THREE.MeshBasicMaterial( {color: "rgb(" + depthVal2 + ", " + depthVal2 + ", " + depthVal2 + ")" } );
             var sphere = new THREE.Mesh( geometry, material );
-            sphere.position.set(xPos/imgWidth + (-0.5), yPos/imageHeight + (-0.5), -1*(depthVal));
+            sphere.position.set(xPos/imgWidth + (-0.5), -1*(yPos/imageHeight + (-0.5)), -1*(depthVal));
             scene.add( sphere );
-            meshes.push(sphere)
+            meshes.push( sphere );
         }
 
         renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -37,15 +37,44 @@
         document.body.appendChild( renderer.domElement );
     }
 
+    var rotWorldMatrix;
+    // Rotate an object around an arbitrary axis in world space
+    function rotateAroundWorldAxis(object, axis, radians) {
+        rotWorldMatrix = new THREE.Matrix4();
+        rotWorldMatrix.makeRotationAxis(axis.normalize(), radians);
+
+        // old code for Three.JS pre r54:
+        //  rotWorldMatrix.multiply(object.matrix);
+        // new code for Three.JS r55+:
+        rotWorldMatrix.multiply(object.matrix);                // pre-multiply
+
+        object.matrix = rotWorldMatrix;
+
+        // old code for Three.js pre r49:
+        // object.rotation.getRotationFromMatrix(object.matrix, object.scale);
+        // old code for Three.js pre r59:
+        // object.rotation.setEulerFromRotationMatrix(object.matrix);
+        // code for r59+:
+        object.rotation.setFromRotationMatrix(object.matrix);
+    }
+
+    var rot = 0;
+
     function animate() {
 
         requestAnimationFrame( animate );
-
+        rot += .01;
+        if (rot > 359){
+            rot = 0
+        }
+        var xAxis = new THREE.Vector3(1,0,0);
         for (var i = 0; i < meshes.length; i++){
             meshT = meshes[i]
-            meshT.rotation.x += 0.01;
-            meshT.rotation.y += 0.02;
-            debugger;
+            //rotateAroundWorldAxis(meshT, xAxis, rot * Math.PI/180)
+            pos1 = new THREE.Matrix4().makeTranslation(0.01, 0.01, 0.01)
+            rot1 = new THREE.Matrix4().makeRotationZ(0.01)
+            pos2 = new THREE.Matrix4().makeTranslation(-0.01, -0.01, -0.01)
+            //meshT.geometry.applyMatrix( pos1*rot1*(pos2) );
         }
         renderer.render( scene, camera );
 
