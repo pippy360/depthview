@@ -5,7 +5,7 @@
     var geometry, material, mesh;
 
 
-    function init() {
+    function init(imgData, imgWidth, imageHeight) {
 
         camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
         camera.position.z = 1;
@@ -17,17 +17,19 @@
 
         mesh = new THREE.Mesh( geometry, material );
         //scene.add( mesh );
-
-        for (var i = 0; i < 4; i++){
-            var geometry = new THREE.SphereGeometry( 0.1, 0.1, 100 );
-            var material = new THREE.MeshBasicMaterial( {color: 0xffff00 + (i*0x10) } );
+        for (var i = 0; i < imgData.length/4; i++){
+            var xPos = i%imgWidth;
+            var yPos = parseInt(i/imgWidth);
+            console.log("x: " + xPos + " y:" + yPos)
+            var geometry = new THREE.SphereGeometry( 0.01, 0.01, 1 );
+            var material = new THREE.MeshBasicMaterial( {color: 0xffff00 + (0x10) } );
             var sphere = new THREE.Mesh( geometry, material );
-            sphere.position.set(0.1, 0.1, 0.1*i);
+            sphere.position.set(xPos/imgWidth, yPos/imageHeight, -1*(imgData[i*4]/255.0));
             scene.add( sphere );
         }
 
         renderer = new THREE.WebGLRenderer( { antialias: true } );
-        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setSize( 800, 600 );
         document.body.appendChild( renderer.domElement );
     }
 
@@ -62,15 +64,15 @@
     }
 
     g_img = new Image();
-    g_img.src = "images/00004.png";
+    g_img.src = "00004.png";
     g_img.onload = function () {
         console.log("getBase64Image(g_img)")
-        console.log(getBase64Image(g_img))
-        init();
+        imgData = getBase64Image(g_img)
+        console.log(imgData)
+        init(imgData, 74, 54);
         animate();
     };
 </script>
-somethign here <button>something </button>
 <body></body>
 
 </html>
