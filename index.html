@@ -82,7 +82,7 @@
       var frameStepTime = 0
       if (prevTime)
           frameStepTime = timestamp - prevTime;
-      prevTime = timeStamp;
+      prevTime = timestamp;
       console.log(frameStepTime);
         window.requestAnimationFrame( animate );
         rot += .01;
