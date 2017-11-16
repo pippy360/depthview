@@ -97,7 +97,7 @@ function isKeyPressed(key) {
       }
       if(isKeyPressed('s')){
         var direction = camera.getWorldDirection();
-        distance = distScale*frameStepTime;
+        distance = -1.0*distScale*frameStepTime;
         camera.position.add( direction.multiplyScalar(distance) );
       }
       
