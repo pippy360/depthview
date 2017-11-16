@@ -22,8 +22,8 @@
     var camera, scene, renderer;
     var geometry, material, mesh, meshes = [];
 var g_keys = [];
-window.onkeyup = function(e) {g_keys[e.keyCode]=false;}
-window.onkeydown = function(e) {g_keys[e.keyCode]=true;}
+window.onkeyup = function(e) {g_keys[e.which]=false;}
+window.onkeydown = function(e) {g_keys[e.which]=true;}
 
 function isKeyPressed(key) {
   return g_keys[key.charCodeAt(0)];
