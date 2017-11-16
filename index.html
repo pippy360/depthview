@@ -84,7 +84,7 @@
           frameStepTime = timestamp - prevTime;
       prevTime = timeStamp;
       console.log(frameStepTime);
-        requestAnimationFrame( animate );
+        window.requestAnimationFrame( animate );
         rot += .01;
         if (rot > 359){
             rot = 0
