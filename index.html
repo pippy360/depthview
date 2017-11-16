@@ -80,7 +80,7 @@ function isKeyPressed(key) {
         // code for r59+:
         object.rotation.setFromRotationMatrix(object.matrix);
     }
-
+    var distScale = 0.001
     var rot = 0;
     var prevTime = null;
     function animate(timestamp) {
@@ -91,8 +91,16 @@ function isKeyPressed(key) {
           frameStepTime = timestamp - prevTime;
       prevTime = timestamp;
       if(isKeyPressed('w')){
-        console.log('something');
+        var direction = camera.getWorldDirection();
+        distance = distScale*frameStepTime;
+        camera.position.add( direction.multiplyScalar(distance) );
       }
+      if(isKeyPressed('s')){
+        var direction = camera.getWorldDirection();
+        distance = distScale*frameStepTime;
+        camera.position.add( direction.multiplyScalar(distance) );
+      }
+      
         rot += .01;
         if (rot > 359){
             rot = 0
