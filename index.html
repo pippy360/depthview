@@ -44,7 +44,7 @@ window.onkeydown = function(e) {keys[e.keyCode]=true;}
             var xPos = i%imgWidth;
             var yPos = parseInt(i/imgWidth);
             console.log("x: " + xPos + " y:" + yPos)
-            var geometry = new THREE.SphereGeometry( 0.01, 0.01, 1 );
+            var geometry = new THREE.CubeGeometry( 0.01, 0.01, 0.01 );
             var material = new THREE.MeshBasicMaterial( {color: "rgb(" + depthVal2 + ", " + depthVal2 + ", " + depthVal2 + ")" } );
             var sphere = new THREE.Mesh( geometry, material );
             sphere.position.set(xPos/imgWidth + (-0.5), -1*(yPos/imageHeight + (-0.5)), -1*(depthVal));
