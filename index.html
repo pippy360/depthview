@@ -43,7 +43,6 @@ window.onkeydown = function(e) {g_keys[e.keyCode]=true;}
             var depthVal2 = imgData[i*4];
             var xPos = i%imgWidth;
             var yPos = parseInt(i/imgWidth);
-            console.log("x: " + xPos + " y:" + yPos)
             var geometry = new THREE.CubeGeometry( 0.01, 0.01, 0.01 );
             var material = new THREE.MeshBasicMaterial( {color: "rgb(" + depthVal2 + ", " + depthVal2 + ", " + depthVal2 + ")" } );
             var sphere = new THREE.Mesh( geometry, material );
@@ -85,7 +84,6 @@ window.onkeydown = function(e) {g_keys[e.keyCode]=true;}
       if (prevTime)
           frameStepTime = timestamp - prevTime;
       prevTime = timestamp;
-      console.log(frameStepTime);
         window.requestAnimationFrame( animate );
         rot += .01;
         if (rot > 359){
