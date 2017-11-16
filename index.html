@@ -84,11 +84,15 @@ function isKeyPressed(key) {
     var rot = 0;
     var prevTime = null;
     function animate(timestamp) {
+      window.requestAnimationFrame( animate );
+
       var frameStepTime = 0
       if (prevTime)
           frameStepTime = timestamp - prevTime;
       prevTime = timestamp;
-        window.requestAnimationFrame( animate );
+      if(isKeyPressed('w')){
+        console.log('something');
+      }
         rot += .01;
         if (rot > 359){
             rot = 0
