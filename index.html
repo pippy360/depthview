@@ -25,6 +25,10 @@ var g_keys = [];
 window.onkeyup = function(e) {g_keys[e.keyCode]=false;}
 window.onkeydown = function(e) {g_keys[e.keyCode]=true;}
 
+function isKeyPressed(key) {
+  return g_keys[key.charCodeAt(0)];
+}
+
     function init(imgData, imgWidth, imageHeight) {
 
         camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
