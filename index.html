@@ -21,7 +21,9 @@
 <script>
     var camera, scene, renderer;
     var geometry, material, mesh, meshes = [];
-
+var g_keys = [];
+window.onkeyup = function(e) {keys[e.keyCode]=false;}
+window.onkeydown = function(e) {keys[e.keyCode]=true;}
 
     function init(imgData, imgWidth, imageHeight) {
 
@@ -130,6 +132,8 @@
         init(imgData, 74, 54);
         window.requestAnimationFrame(animate);
     };
+
+  
 </script>
     
     </body>
