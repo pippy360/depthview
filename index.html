@@ -77,9 +77,13 @@
     }
 
     var rot = 0;
-
-    function animate() {
-
+    var prevTime = null;
+    function animate(timestamp) {
+      var frameStepTime = 0
+      if (prevTime)
+          frameStepTime = timestamp - prevTime;
+      prevTime = timeStamp;
+      console.log(frameStepTime);
         requestAnimationFrame( animate );
         rot += .01;
         if (rot > 359){
